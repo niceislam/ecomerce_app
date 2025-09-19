@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:new_ecomerce/all_list/cartItemColor.dart';
 
 import '../../all_list/cartList.dart';
 import '../widget/all_widget.dart';
@@ -33,24 +34,85 @@ class _CartItemState extends State<CartItem> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         child: ListView.builder(
-          itemCount: CartList.length,
+          itemCount: cartItems.length,
           itemBuilder: (context, index) {
-            final items = CartList[index];
-            return CustomCartshowitem(
-              quantity: quantity,
-              image: "${items.image1}",
-              details: "${items.image1}",
-              name: "${items.image1}",
-              price: items.price,
+            return Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: CustomCartshowitem(
+                cartColor: cartItemColor[index % cartItemColor.length],
+                deleted: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("Confirmation"),
+                      content: Text("Are you delete this cart item ?"),
+                      actions: [
+                        InkWell(
+                          onTap: () {
+                            cartItems.removeAt(index);
+                            Navigator.pop(context);
+                            setState(() {});
+                          },
+                          child: Card(
+                            color: Colors.red,
+                            child: SizedBox(
+                              height: 35,
+                              width: 60,
+                              child: Center(
+                                child: Text(
+                                  "yes",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Card(
+                            color: Colors.green,
+                            child: SizedBox(
+                              height: 35,
+                              width: 60,
+                              child: Center(
+                                child: Text(
+                                  "No",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                  setState(() {});
+                },
+                quantity: quantity,
+                image: "${cartItems[index]['image1']}",
+                details: "${cartItems[index]['details']}",
+                name: "${cartItems[index]['name']}",
+                price: double.parse(cartItems[index]['price']),
 
-              qntplus: () {
-                quantity++;
-                setState(() {});
-              },
-              qntminus: () {
-                quantity--;
-                setState(() {});
-              },
+                qntplus: () {
+                  quantity++;
+                  setState(() {});
+                },
+                qntminus: () {
+                  quantity--;
+                  setState(() {});
+                },
+              ),
             );
           },
         ),

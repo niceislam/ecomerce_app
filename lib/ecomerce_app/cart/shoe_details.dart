@@ -160,15 +160,17 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                 ),
                 CustomAddtoCard(
                   ontap: () {
+                    var a = shoeItems[widget.index];
+                    cartItems.add(a);
                     setState(() {});
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (c) => CartItem()),
                     );
+                    log("================$cartItems");
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.pink,
-
                         duration: Duration(seconds: 3),
                         showCloseIcon: true,
                         content: Text(

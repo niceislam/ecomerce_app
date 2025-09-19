@@ -111,32 +111,32 @@ class _Bottompage1State extends State<Bottompage1> {
               height: 200,
               width: MediaQuery.sizeOf(context).width,
               child: ListView.builder(
-                itemCount: shoeItem.length,
+                itemCount: shoeItems.length,
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  final item = shoeItem[index];
                   return InkWell(
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (c) => ShoeDetails(
-                            image1: "${item.image1}",
-                            image2: "${item.image2}",
-                            image3: "${item.image3}",
-                            details: "${item.details}",
-                            name: "${item.productittle}",
-                            price: item.price, index: index,
+                            image1: "${shoeItems[index]['image1']}",
+                            image2: "${shoeItems[index]['image2']}",
+                            image3: "${shoeItems[index]['image3']}",
+                            details: "${shoeItems[index]['details']}",
+                            name: "${shoeItems[index]['name']}",
+                            price: double.parse(shoeItems[index]['price']),
+                            index: index,
                           ),
                         ),
                       );
                     },
                     child: CustomshoeCard(
-                      image: "${item.image1}",
-                      name: "${item.productittle}",
-                      price: item.price,
-                      status: "${item.status}",
+                      image: "${shoeItems[index]['image1']}",
+                      name: "${shoeItems[index]['name']}",
+                      price: double.parse(shoeItems[index]['price']),
+                      status: "${shoeItems[index]['status']}",
                     ),
                   );
                 },

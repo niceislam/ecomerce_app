@@ -128,8 +128,20 @@ class CustomAddtoCard extends StatelessWidget {
     );
   }
 }
+
 class CustomCartshowitem extends StatelessWidget {
-  const CustomCartshowitem({super.key, this.name, this.details, this.price, this.image, this.deleted, this.qntminus, this.qntplus, this.quantity});
+  const CustomCartshowitem({
+    super.key,
+    this.name,
+    this.details,
+    this.price,
+    this.image,
+    this.deleted,
+    this.qntminus,
+    this.qntplus,
+    this.quantity,
+    this.cartColor,
+  });
   final String? name;
   final String? details;
   final double? price;
@@ -138,6 +150,7 @@ class CustomCartshowitem extends StatelessWidget {
   final VoidCallback? qntminus;
   final VoidCallback? qntplus;
   final int? quantity;
+  final Color? cartColor;
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +160,7 @@ class CustomCartshowitem extends StatelessWidget {
           padding: EdgeInsets.only(top: 10, left: 10, bottom: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: Colors.greenAccent,
+            color: cartColor,
           ),
 
           height: 125,
@@ -179,7 +192,7 @@ class CustomCartshowitem extends StatelessWidget {
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                         overflow: TextOverflow.ellipsis,
-                        fontSize: 25,
+                        fontSize: 20,
                       ),
                     ),
                     Text(
@@ -188,7 +201,7 @@ class CustomCartshowitem extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.black,
                         overflow: TextOverflow.ellipsis,
-                        fontSize: 18,
+                        fontSize: 15,
                       ),
                     ),
                     Spacer(),
@@ -248,4 +261,3 @@ class CustomCartshowitem extends StatelessWidget {
     );
   }
 }
-
