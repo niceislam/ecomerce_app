@@ -261,3 +261,41 @@ class CustomCartshowitem extends StatelessWidget {
     );
   }
 }
+
+class CustomProductType extends StatelessWidget {
+  const CustomProductType({
+    super.key,
+    this.centerText,
+    this.cardColor,
+    this.textcolor,
+    this.ontap,
+  });
+  final String? centerText;
+  final Color? cardColor;
+  final Color? textcolor;
+  final VoidCallback? ontap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: ontap,
+      child: Card(
+        color: cardColor,
+        child: SizedBox(
+          height: 40,
+          width: MediaQuery.sizeOf(context).width / 3.7,
+          child: Center(
+            child: Text(
+              "${centerText}",
+              style: TextStyle(
+                color: textcolor,
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

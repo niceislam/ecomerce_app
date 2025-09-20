@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:new_ecomerce/all_list/cartList.dart';
 import 'package:new_ecomerce/all_list/shoe_item_list.dart';
 
@@ -87,7 +88,7 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
+                          fontSize: 25,
                         ),
                       ),
                     ),
@@ -111,7 +112,7 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                   "${widget.details}",
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 17,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -159,26 +160,18 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                   ),
                 ),
                 CustomAddtoCard(
-                  ontap: () {
+                  ontap: () async {
                     var a = shoeItems[widget.index];
+                    EasyLoading.show();
+                    await Future.delayed(Duration(seconds: 1));
                     cartItems.add(a);
+                    EasyLoading.showSuccess("Cart added successfully");
                     setState(() {});
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (c) => CartItem()),
                     );
                     log("================$cartItems");
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        backgroundColor: Colors.pink,
-                        duration: Duration(seconds: 3),
-                        showCloseIcon: true,
-                        content: Text(
-                          "Cart added successfully",
-                          style: TextStyle(color: Colors.white, fontSize: 19),
-                        ),
-                      ),
-                    );
                   },
                   bkcolor: Colors.blue,
                   txtcolor: Colors.white,

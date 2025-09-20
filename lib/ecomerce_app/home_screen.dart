@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_ecomerce/all_list/cartList.dart';
 import 'package:new_ecomerce/ecomerce_app/bottompage1.dart';
 import 'package:new_ecomerce/ecomerce_app/bottompage2.dart';
 import 'package:new_ecomerce/ecomerce_app/bottompage3.dart';
@@ -47,13 +48,38 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               actions: [
                 InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (c)=> CartItem()));
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (c) => CartItem()),
+                    );
                   },
                   child: CircleAvatar(
                     radius: 22,
                     backgroundColor: Colors.black.withOpacity(0.08),
-                    child: Icon(Icons.shopping_cart_outlined, color: Colors.grey),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Icon(Icons.shopping_cart_outlined, color: Colors.grey),
+                        Positioned(
+                          top: -6,
+                          right: -5,
+                          child: CircleAvatar(
+                            radius: 7,
+                            backgroundColor: Colors.red,
+                            child: Center(
+                              child: Text(
+                                "${cartItems.length}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(width: 10),

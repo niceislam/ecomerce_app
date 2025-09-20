@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:new_ecomerce/ecomerce_app/cart/shoe_details.dart';
+import 'package:new_ecomerce/ecomerce_app/product_seeMore.dart';
 import 'package:new_ecomerce/ecomerce_app/widget/all_widget.dart';
 
 import '../all_list/carousel _list.dart';
@@ -105,7 +107,12 @@ class _Bottompage1State extends State<Bottompage1> {
               ),
             ),
             SizedBox(height: 15),
-            CustomRowtxt(title: "Popular product", vmore: "view more"),
+            CustomRowtxt(vewontap: ()async{
+              EasyLoading.show();
+              await Future.delayed(Duration(seconds: 1));
+              EasyLoading.dismiss();
+              Navigator.push(context, MaterialPageRoute(builder: (c)=> ProductSeemore()));
+            } ,title: "Popular product", vmore: "See more"),
             SizedBox(height: 15),
             Container(
               height: 200,
