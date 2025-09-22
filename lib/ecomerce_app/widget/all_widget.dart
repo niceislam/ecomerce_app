@@ -37,12 +37,12 @@ class CustomshoeCard extends StatelessWidget {
     super.key,
     required this.image,
     required this.name,
-    required this.price,
+    this.price,
     required this.status,
   });
   final String image;
   final String name;
-  final double price;
+  final int? price;
   final String status;
 
   @override

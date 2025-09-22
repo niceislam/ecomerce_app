@@ -4,7 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:new_ecomerce/all_list/cartList.dart';
-import 'package:new_ecomerce/all_list/shoe_item_list.dart';
+import 'package:new_ecomerce/all_list/class.dart';
+import 'package:new_ecomerce/model/shoe_database.dart';
 
 import '../widget/all_widget.dart';
 import 'cart_item.dart';
@@ -17,7 +18,7 @@ class ShoeDetails extends StatefulWidget {
     required this.image3,
     required this.details,
     required this.name,
-    required this.price,
+    this.price,
     required this.index,
   });
   final String image1;
@@ -25,7 +26,7 @@ class ShoeDetails extends StatefulWidget {
   final String image3;
   final String details;
   final String name;
-  final double price;
+  final int? price;
   final int index;
 
   @override
@@ -161,17 +162,17 @@ class _ShoeDetailsState extends State<ShoeDetails> {
                 ),
                 CustomAddtoCard(
                   ontap: () async {
-                    var a = shoeItems[widget.index];
-                    EasyLoading.show();
-                    await Future.delayed(Duration(seconds: 1));
-                    cartItems.add(a);
-                    EasyLoading.showSuccess("Cart added successfully");
-                    setState(() {});
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (c) => CartItem()),
-                    );
-                    log("================$cartItems");
+                    // var a = ShoeClass().modelPassData[widget.index];
+                    // EasyLoading.show();
+                    // await Future.delayed(Duration(seconds: 1));
+                    // a = cartItems;
+                    // EasyLoading.showSuccess("Cart added successfully");
+                    // setState(() {});
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(builder: (c) => CartItem()),
+                    // );
+                    // log("================$cartItems");
                   },
                   bkcolor: Colors.blue,
                   txtcolor: Colors.white,

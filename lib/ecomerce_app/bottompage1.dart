@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +7,15 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:new_ecomerce/ecomerce_app/cart/shoe_details.dart';
 import 'package:new_ecomerce/ecomerce_app/product_seeMore.dart';
 import 'package:new_ecomerce/ecomerce_app/widget/all_widget.dart';
+import 'package:new_ecomerce/model/converter.dart';
+import 'package:new_ecomerce/model/shoe_model.dart';
 
 import '../all_list/carousel _list.dart';
-import '../all_list/shoe_item_list.dart';
+import '../all_list/class.dart';
+import '../model/shoe_database.dart';
+class ShoeClass {
+  List<ShoeItemData> modelPassData = [];
+}
 
 class Bottompage1 extends StatefulWidget {
   const Bottompage1({super.key});
@@ -17,6 +25,24 @@ class Bottompage1 extends StatefulWidget {
 }
 
 class _Bottompage1State extends State<Bottompage1> {
+
+  fetchData() async {
+    await ShoeItemDConverter().itemToModelconverter();
+    var a = await ShoeItemDConverter().itemToModelconverter();
+    ShoeClass().modelPassData = a;
+    log("==========bbbbb$a");
+
+    setState(() {
+    });
+    log("=========aaaaa========${ShoeClass().modelPassData.length}");
+  }
+
+  @override
+  void initState() {
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,18 +133,25 @@ class _Bottompage1State extends State<Bottompage1> {
               ),
             ),
             SizedBox(height: 15),
-            CustomRowtxt(vewontap: ()async{
-              EasyLoading.show();
-              await Future.delayed(Duration(seconds: 1));
-              EasyLoading.dismiss();
-              Navigator.push(context, MaterialPageRoute(builder: (c)=> ProductSeemore()));
-            } ,title: "Popular product", vmore: "See more"),
+            CustomRowtxt(
+              vewontap: () async {
+                EasyLoading.show();
+                await Future.delayed(Duration(seconds: 1));
+                EasyLoading.dismiss();
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(builder: (c) => ProductSeemore()),
+                // );
+              },
+              title: "Popular product",
+              vmore: "See more",
+            ),
             SizedBox(height: 15),
             Container(
               height: 200,
               width: MediaQuery.sizeOf(context).width,
               child: ListView.builder(
-                itemCount: shoeItems.length,
+                itemCount: ShoeClass().modelPassData.length,
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
@@ -128,22 +161,26 @@ class _Bottompage1State extends State<Bottompage1> {
                         context,
                         MaterialPageRoute(
                           builder: (c) => ShoeDetails(
-                            image1: "${shoeItems[index]['image1']}",
-                            image2: "${shoeItems[index]['image2']}",
-                            image3: "${shoeItems[index]['image3']}",
-                            details: "${shoeItems[index]['details']}",
-                            name: "${shoeItems[index]['name']}",
-                            price: double.parse(shoeItems[index]['price']),
+                            image1:
+                                "${ShoeClass().modelPassData[index].image1}",
+                            image2:
+                                "${ShoeClass().modelPassData[index].image2}",
+                            image3:
+                                "${ShoeClass().modelPassData[index].image3}",
+                            details:
+                                "${ShoeClass().modelPassData[index].details}",
+                            name: "${ShoeClass().modelPassData[index].name}",
+                            price: ShoeClass().modelPassData[index].price,
                             index: index,
                           ),
                         ),
                       );
                     },
                     child: CustomshoeCard(
-                      image: "${shoeItems[index]['image1']}",
-                      name: "${shoeItems[index]['name']}",
-                      price: double.parse(shoeItems[index]['price']),
-                      status: "${shoeItems[index]['status']}",
+                      image: "${ShoeClass().modelPassData[index].image1}",
+                      name: "${ShoeClass().modelPassData[index].name}",
+                      price: ShoeClass().modelPassData[index].price,
+                      status: "${ShoeClass().modelPassData[index].status}",
                     ),
                   );
                 },
