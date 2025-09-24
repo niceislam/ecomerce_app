@@ -21,7 +21,7 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
     isLoading = true;
     SearchData = await ShoeController().shoeModelFun();
     isLoading = false;
-
+    finalShoeData = SearchData;
     setState(() {});
   }
 
@@ -32,7 +32,9 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
   }
 
   searchFun({required String searchValue}) {
-    finalShoeData = SearchData.where((v) => v.name == searchValue).toList();
+    finalShoeData = SearchData.where(
+      (v) => v.name!.toLowerCase().contains(searchValue.toLowerCase()),
+    ).toList();
   }
 
   @override
@@ -56,7 +58,10 @@ class _HomeSearchScreenState extends State<HomeSearchScreen> {
               onChanged: (v) {
                 if (v != "") {
                   searchFun(searchValue: v);
+                } else {
+                  finalShoeData = SearchData;
                 }
+                setState(() {});
               },
               decoration: InputDecoration(
                 hintText: "Search here...",
